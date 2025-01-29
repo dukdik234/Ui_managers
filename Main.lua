@@ -64,7 +64,6 @@ function Ui_manager:Make_maingui()
     self.Frame.Size = UDim2.new(1, 0, 1, 0)
 end
 function Ui_manager:Make_closeuibut(callback)
-    if self.Isopen then return end
     local Main_but = cloneref(Instance.new("Frame"))
     local ImageButton = cloneref(Instance.new("ImageButton"))
     print("Button")
@@ -88,9 +87,9 @@ function Ui_manager:Make_closeuibut(callback)
     ImageButton.Image = "rbxassetid://109557005690410"
     ImageButton.MouseButton1Click:Connect(function()
         print("Button Clicked!")
-        
-        callback()
-        
+        if callback then
+            callback()
+        end
     end)
     
     ImageButton.Draggable = true
