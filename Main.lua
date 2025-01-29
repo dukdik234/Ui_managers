@@ -19,7 +19,7 @@ local Custom_Cloneref = function(org)
 end 
 local cloneref = cloneref or Custom_Cloneref or function(...) return ... end 
 local coreui = cloneref(game:GetService("CoreGui"))
-local uis = cloneref(game:GetService("uis"))
+local uis = cloneref(game:GetService("UserInputService"))
 
 Ui_manager.__index = Ui_manager
 
