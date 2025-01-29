@@ -84,7 +84,11 @@ function Ui_manager:Make_closeuibut(callback)
 
     local dragging = false
     local offset = Vector2.new()
-
+    ImageButton.MouseButton1Down:Connect(function()
+        if callback then
+            callback()
+        end
+    end)
     local function onInputBegan(input, gameProcessed)
         if gameProcessed then return end
         if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
