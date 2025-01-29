@@ -84,85 +84,36 @@ function Ui_manager:Make_closeuibut(callback)
     ImageButton.Size = UDim2.new(0, 100, 0, 100)
     ImageButton.Image = "rbxassetid://109557005690410"
 
-    if not uis.TouchEnabled then
-        ImageButton.MouseEnter:Connect(function()
-            game:GetService("TweenService"):Create(ImageButton, 
-                TweenInfo.new(0.2), 
-                {ImageTransparency = 0.2}
-            ):Play()
-        end)
-        
-        ImageButton.MouseLeave:Connect(function()
-            game:GetService("TweenService"):Create(ImageButton, 
-                TweenInfo.new(0.2), 
-                {ImageTransparency = 0}
-            ):Play()
-        end)
-    end
-
-
-    local function activateButton()
-        if callback then
-            callback()
-        end
-    end
-
-    ImageButton.MouseButton1Click:Connect(activateButton)
-
-
     local dragging = false
     local offset = Vector2.new()
     
-    local function updatePosition(inputPosition)
-        local newPos = UDim2.new(
-            0, 
-            math.clamp(inputPosition.X - offset.X, 0, self.Frame.AbsoluteSize.X - Main_but.AbsoluteSize.X),
-            0, 
-            math.clamp(inputPosition.Y - offset.Y, 0, self.Frame.AbsoluteSize.Y - Main_but.AbsoluteSize.Y)
-        )
-        Main_but.Position = newPos
-    end
-
-    local function beginDrag(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or
-           input.UserInputType == Enum.UserInputType.Touch then
+    local function onInputBegan(input, gameProcessed)
+        if gameProcessed then return end
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = true
-            local inputPosition = input.Position
-            local buttonPosition = Main_but.AbsolutePosition
-            offset = Vector2.new(
-                inputPosition.X - buttonPosition.X,
-                inputPosition.Y - buttonPosition.Y
-            )
+            local mousePos = input.Position
+            local buttonPos = Main_but.AbsolutePosition
+            offset = Vector2.new(mousePos.X - buttonPos.X, mousePos.Y - buttonPos.Y)
         end
     end
-
-    local function updateDrag(input)
-        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or
-                        input.UserInputType == Enum.UserInputType.Touch) then
-            updatePosition(input.Position)
+    
+    local function onInputChanged(input)
+        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+            local mousePos = input.Position
+            local newPos = UDim2.new(0, mousePos.X - offset.X, 0, mousePos.Y - offset.Y)
+            Main_but.Position = newPos
         end
     end
-
-    local function endDrag(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or
-           input.UserInputType == Enum.UserInputType.Touch then
+    
+    local function onInputEnded(input)
+        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
             dragging = false
         end
     end
-
-
-    ImageButton.InputBegan:Connect(beginDrag)
-    ImageButton.InputChanged:Connect(updateDrag)
-    ImageButton.InputEnded:Connect(endDrag)
-
-  
-    self.Frame:GetPropertyChangedSignal("AbsoluteSize"):Connect(function()
-        local currentPosition = Main_but.Position
-        updatePosition(Vector2.new(
-            currentPosition.X.Offset + Main_but.AbsolutePosition.X,
-            currentPosition.Y.Offset + Main_but.AbsolutePosition.Y
-        ))
-    end)
+    
+    ImageButton.InputBegan:Connect(onInputBegan)
+    ImageButton.InputChanged:Connect(onInputChanged)
+    ImageButton.InputEnded:Connect(onInputEnded)
 end
 
 return Ui_manager.new()
