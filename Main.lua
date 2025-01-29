@@ -48,7 +48,7 @@ end
 
 function Ui_manager:Make_maingui()
     if self.Isopen then return end
-    print("Make_mainguisss")
+    print("Make_maingui")
     self.Screenui = cloneref(Instance.new("ScreenGui"))
     self.Screenui.Parent = coreui
     self.Screenui.Name = "Emp_core"
@@ -66,8 +66,8 @@ end
 function Ui_manager:Make_closeuibut(callback)
     if self.Isopen then return end
     local Main_but = cloneref(Instance.new("Frame"))
-    local ImageButton = cloneref(Instance.new("ImageLabel"))
-    print("Buttons")
+    local ImageButton = cloneref(Instance.new("ImageButton"))
+    print("Button")
 
 
     Main_but.Name = "Main_but"
@@ -92,9 +92,9 @@ function Ui_manager:Make_closeuibut(callback)
         end
     end)
     
-    Main_but.Draggable = true
-    Main_but.Selectable = true
-    Main_but.Active = true
+    ImageButton.Draggable = true
+    ImageButton.Selectable = true
+    ImageButton.Active = true
 
     self.Isopen = true
 end
