@@ -116,4 +116,8 @@ function Ui_manager:Make_closeuibut(callback)
     ImageButton.InputEnded:Connect(onInputEnded)
 end
 
-return Ui_manager.new()
+
+
+local Main = Ui_manager.new()
+Main:Cleanui()
+return Main
