@@ -48,7 +48,7 @@ end
 
 function Ui_manager:Make_maingui()
     if self.Isopen then return end
-    print("Make_maingui")
+    print("Make_mainguisss")
     self.Screenui = cloneref(Instance.new("ScreenGui"))
     self.Screenui.Parent = coreui
     self.Screenui.Name = "Emp_core"
