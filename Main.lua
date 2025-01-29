@@ -66,7 +66,7 @@ function Ui_manager:Make_closeuibut(callback)
     if self.Isopen then return end
     local Main_but = cloneref(Instance.new("Frame"))
     local ImageButton = cloneref(Instance.new("ImageLabel"))
-    print("Button")
+    print("Buttons")
 
 
     Main_but.Name = "Main_but"
