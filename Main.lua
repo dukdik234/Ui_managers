@@ -88,12 +88,9 @@ function Ui_manager:Make_closeuibut(callback)
     ImageButton.Image = "rbxassetid://109557005690410"
     ImageButton.MouseButton1Click:Connect(function()
         print("Button Clicked!")
-        print("Callback:", callback)
-        if callback then
-            callback()
-        else
-            warn("callback is nil!")
-        end
+        
+        callback()
+        
     end)
     
     ImageButton.Draggable = true
