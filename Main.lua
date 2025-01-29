@@ -63,7 +63,7 @@ function Ui_manager:Make_maingui()
 end
 function Ui_manager:Make_closeuibut(callback)
     if self.Frame:FindFirstChild("Main_but") or 
-    self.Frame:FindFirstChild("Main_but"):FindFirstChild("ImageLabel") then return end
+    self.Frame.Main_but:FindFirstChild("ImageLabel") then return end
     local Main_but = cloneref(Instance.new("Frame"))
     local ImageButton = cloneref(Instance.new("ImageLabel"))
     print("Button")
