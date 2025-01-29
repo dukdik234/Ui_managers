@@ -25,6 +25,7 @@ Ui_manager.__index = Ui_manager
 
 function Ui_manager.new()
     local self = setmetatable({},Ui_manager)
+    self.Isopen = false
     self:initialize()
 
     return self
@@ -45,7 +46,7 @@ function Ui_manager:Cleanui()
 end
 
 function Ui_manager:Make_maingui()
-    if coreui:FindFirstChild("Emp_core") then return end
+    if self.Isopen then return end
     print("Make_maingui")
     self.Screenui = cloneref(Instance.new("ScreenGui"))
     self.Screenui.Parent = coreui
@@ -62,11 +63,10 @@ function Ui_manager:Make_maingui()
     self.Frame.Size = UDim2.new(1, 0, 1, 0)
 end
 function Ui_manager:Make_closeuibut(callback)
-    if self.Frame:FindFirstChild("Main_but") or 
-    self.Frame:WaitForChild("Main_but"):FindFirstChild("ImageLabel") then return end
+    if self.Isopen then return end
     local Main_but = cloneref(Instance.new("Frame"))
     local ImageButton = cloneref(Instance.new("ImageLabel"))
-    print("Buttons")
+    print("Button")
 
 
     Main_but.Name = "Main_but"
@@ -90,6 +90,8 @@ function Ui_manager:Make_closeuibut(callback)
     Main_but.Draggable = true
     Main_but.Selectable = true
     Main_but.Active = true
+
+    self.Isopen = true
 end
 
 
