@@ -86,7 +86,8 @@ function Ui_manager:Make_closeuibut(callback)
     ImageButton.BorderSizePixel = 0
     ImageButton.Size = UDim2.new(0, 100, 0, 100)
     ImageButton.Image = "rbxassetid://109557005690410"
-    ImageButton.MouseButton1Down:Connect(function()
+    ImageButton.MouseButton1Click:Connect(function()
+        print("Button Clicked!")
         if callback then
             callback()
         end
