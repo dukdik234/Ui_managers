@@ -62,9 +62,10 @@ function Ui_manager:Make_maingui()
     self.Frame.Size = UDim2.new(1, 0, 1, 0)
 end
 function Ui_manager:Make_closeuibut(callback)
-    if self.Frame:FindFirstChild("Main_but") then return end
+    if self.Frame:FindFirstChild("Main_but") or 
+    self.Frame:FindFirstChild("Main_but"):FindFirstChild("ImageLabel") then return end
     local Main_but = cloneref(Instance.new("Frame"))
-    local ImageButton = cloneref(Instance.new("ImageButton"))
+    local ImageButton = cloneref(Instance.new("ImageLabel"))
     print("Button")
 
 
@@ -85,36 +86,10 @@ function Ui_manager:Make_closeuibut(callback)
     ImageButton.Size = UDim2.new(0, 100, 0, 100)
     ImageButton.Image = "rbxassetid://109557005690410"
 
-    local dragging = false
-    local offset = Vector2.new()
     
-    local function onInputBegan(input, gameProcessed)
-        if gameProcessed then return end
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            dragging = true
-            local mousePos = input.Position
-            local buttonPos = Main_but.AbsolutePosition
-            offset = Vector2.new(mousePos.X - buttonPos.X, mousePos.Y - buttonPos.Y)
-        end
-    end
-    
-    local function onInputChanged(input)
-        if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-            local mousePos = input.Position
-            local newPos = UDim2.new(0, mousePos.X - offset.X, 0, mousePos.Y - offset.Y)
-            Main_but.Position = newPos
-        end
-    end
-    
-    local function onInputEnded(input)
-        if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-            dragging = false
-        end
-    end
-    
-    ImageButton.InputBegan:Connect(onInputBegan)
-    ImageButton.InputChanged:Connect(onInputChanged)
-    ImageButton.InputEnded:Connect(onInputEnded)
+    Main_but.Draggable = true
+    Main_but.Selectable = true
+    Main_but.Active = true
 end
 
 
