@@ -19,7 +19,7 @@ local Custom_Cloneref = function(org)
 end 
 local cloneref = cloneref or Custom_Cloneref or function(...) return ... end 
 local coreui = cloneref(game:GetService("CoreGui"))
-local uis = cloneref(game:GetService("UserInputService"))
+local uis = cloneref(game:GetService("uis"))
 
 Ui_manager.__index = Ui_manager
 
@@ -84,7 +84,7 @@ function Ui_manager:Make_closeuibut(callback)
     ImageButton.Size = UDim2.new(0, 100, 0, 100)
     ImageButton.Image = "rbxassetid://109557005690410"
 
-    if not UserInputService.TouchEnabled then
+    if not uis.TouchEnabled then
         ImageButton.MouseEnter:Connect(function()
             game:GetService("TweenService"):Create(ImageButton, 
                 TweenInfo.new(0.2), 
