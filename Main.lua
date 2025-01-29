@@ -119,5 +119,5 @@ end
 
 
 local Mains = Ui_manager.new()
-Mains:Cleanui()
+
 return Mains
