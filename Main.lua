@@ -41,6 +41,7 @@ function Ui_manager:Cleanui()
     for _, v in pairs(coreui:GetChildren()) do
 		if v.Name == "Emp_core" then
 			v:Destroy()
+            self.Isopen = false
 		end
 	end
 end
@@ -66,7 +67,7 @@ function Ui_manager:Make_closeuibut(callback)
     if self.Isopen then return end
     local Main_but = cloneref(Instance.new("Frame"))
     local ImageButton = cloneref(Instance.new("ImageLabel"))
-    print("Buttons")
+    print("Button")
 
 
     Main_but.Name = "Main_but"
@@ -85,7 +86,11 @@ function Ui_manager:Make_closeuibut(callback)
     ImageButton.BorderSizePixel = 0
     ImageButton.Size = UDim2.new(0, 100, 0, 100)
     ImageButton.Image = "rbxassetid://109557005690410"
-
+    ImageButton.MouseButton1Down:Connect(Function()
+        if callback then
+            callback()
+        end
+    end)
     
     Main_but.Draggable = true
     Main_but.Selectable = true
