@@ -45,8 +45,7 @@ function Ui_manager:Cleanui()
 end
 
 function Ui_manager:Make_maingui()
-    if self.Screenui or self.Frame then return end
-    print("Main")
+    print("Make_maingui")
     self.Screenui = cloneref(Instance.new("ScreenGui"))
     self.Screenui.Parent = coreui
     self.Screenui.Name = "Emp_core"
@@ -62,7 +61,7 @@ function Ui_manager:Make_maingui()
     self.Frame.Size = UDim2.new(1, 0, 1, 0)
 end
 function Ui_manager:Make_closeuibut(callback)
-    if self.Frame:FindFirstChild("Main_but") then return end
+
     local Main_but = cloneref(Instance.new("Frame"))
     local ImageButton = cloneref(Instance.new("ImageButton"))
     print("Button")
