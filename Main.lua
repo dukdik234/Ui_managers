@@ -26,6 +26,7 @@ Ui_manager.__index = Ui_manager
 function Ui_manager.new()
     local self = setmetatable({},Ui_manager)
     self.Isopen = false
+    self.Lable = ""
     self:initialize()
 
     return self
@@ -84,7 +85,7 @@ function Ui_manager:Make_closeuibut(callback)
     ImageButton.BorderColor3 = Color3.fromRGB(0, 0, 0)
     ImageButton.BorderSizePixel = 0
     ImageButton.Size = UDim2.new(0, 100, 0, 100)
-    ImageButton.Image = "rbxassetid://97117857651030"
+    ImageButton.Image = self.Lable
     ImageButton.MouseButton1Click:Connect(function()
         if callback then
             callback()
